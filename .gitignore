@@ -1,0 +1,17 @@
+﻿.DS_Store
+
+# Build outputs
+/bin/
+/dist/
+/passwork-cli
+/passwork-cli-*
+*.exe
+
+# Test and coverage outputs
+*.test
+coverage.out
+
+# Local environment
+.env
+.env.*
+!.env.example

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-default
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp-default
+  template:
+    metadata:
+      labels:
+        app: myapp-default
+    spec:
+      containers:
+        - name: app
+          image: your-registry/your-app-with-passwork-cli:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: passwork-default-env
+          command: ["/bin/sh", "-lc"]
+          args:
+            - >
+              passwork-cli exec
+              --password-id "<item-id>"
+              --cmd "/app/server"
+          ports:
+            - containerPort: 8080
